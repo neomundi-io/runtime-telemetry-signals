@@ -1,9 +1,0 @@
-{
-  "signal": "G",
-  "type": "governance_stability_state",
-  "normalized_range": [0, 1],
-  "mode": "OBS",
-  "state": 0.82,
-  "decision": "PASS",
-  "timestamp": "2026-05-17T11:42:11Z"
-}
