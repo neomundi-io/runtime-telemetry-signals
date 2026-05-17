@@ -1,0 +1,9 @@
+{
+  "signal": "ΔG",
+  "type": "runtime_variation_signal",
+  "mode": "GOV",
+  "window": "execution_segment",
+  "variation": -0.06,
+  "regime": "SIGNAL",
+  "timestamp": "2026-05-17T11:44:52Z"
+}
