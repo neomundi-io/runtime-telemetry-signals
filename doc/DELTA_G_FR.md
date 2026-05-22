@@ -1,4 +1,4 @@
-# ΔG = variation de G entre deux fenêtres runtime
+# ΔG - Signal de variation runtime de stabilité
 
 ## Version française de travail
 
@@ -8,7 +8,7 @@ Il ne divulgue pas les formules propriétaires, les pondérations internes, les 
 
 ## Définition
 
-ΔG représente la variation observée du signal G entre plusieurs fenêtres d’exécution runtime.
+ΔG représente la variation observée du signal G entre deux ou plusieurs fenêtres d’exécution runtime.
 
 Il permet de suivre l’évolution d’un état de stabilité de gouvernance pendant une génération IA ou un segment d’exécution.
 
