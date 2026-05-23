@@ -1,3 +1,5 @@
+> 🇫🇷 **Version française disponible ici :** [README.fr.md](./README.fr.md)
+
 # Runtime Telemetry Signals
 
 Public methodological notes and signal definitions for governance-oriented AI runtime observability.
