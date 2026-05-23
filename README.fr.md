@@ -1,3 +1,5 @@
+🇬🇧 **English version available here:** [README.md](./README.md)
+
 # Signaux de télémétrie runtime
 
 Notes méthodologiques publiques et définitions de signaux pour l’observabilité runtime des systèmes d’IA orientée gouvernance.
