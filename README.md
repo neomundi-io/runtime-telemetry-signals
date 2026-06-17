@@ -1,307 +1,307 @@
-# Signaux de télémétrie runtime
+# Runtime Telemetry Signals
 
-Notes méthodologiques publiques et définitions de signaux pour l’observabilité runtime des systèmes d’IA orientée gouvernance.
+Public methodological notes and signal definitions for governance-oriented AI runtime observability.
 
-🇬🇧 English version available here: [README.md](README.md)
-
----
-
-## Objet du dépôt
-
-Ce dépôt documente la structure conceptuelle publique des signaux de télémétrie runtime NeoMundi, notamment :
-
-* les états de stabilité orientés gouvernance ;
-* les signaux de variation runtime ;
-* les concepts d’observabilité comportementale ;
-* les artefacts de télémétrie orientés gouvernance ;
-* les limites méthodologiques d’interprétation.
-
-Ce dépôt ne divulgue pas les implémentations internes propriétaires, les pondérations, ni les mécanismes d’inférence runtime de NeoMundi ControlTower.
-
-Son objectif est de clarifier :
-
-* ce que les signaux sont censés représenter ;
-* ce qu’ils ne prétendent pas représenter ;
-* comment ils peuvent être utilisés dans des systèmes d’observabilité et de gouvernance runtime.
+🇫🇷 Version française disponible ici : [README.fr.md](README.fr.md)
 
 ---
 
-## Familles initiales de signaux
+## Repository Purpose
+
+This repository documents the public conceptual structure of NeoMundi runtime telemetry signals, including:
+
+* governance-oriented stability states;
+* runtime variation signals;
+* behavioral observability concepts;
+* governance-oriented telemetry artifacts;
+* methodological interpretation boundaries.
+
+This repository does not disclose proprietary internal implementations, weights, or runtime inference mechanisms from NeoMundi ControlTower.
+
+Its purpose is to clarify:
+
+* what the signals are intended to represent;
+* what they do not claim to represent;
+* how they may be used within runtime observability and governance systems.
+
+---
+
+## Initial Signal Families
 
 ### G
 
-**État de stabilité normalisé orienté gouvernance.**
+**Governance-oriented normalized stability state.**
 
-Le G-score est conçu pour représenter une condition normalisée de stabilité, de régularité ou de cohérence runtime associée à une génération ou à un état d’exécution d’un système d’IA.
+The G-score is designed to represent a normalized runtime stability, regularity, or behavioral coherence condition associated with an AI generation or execution state.
 
-Il doit être lu comme un **signal de stabilité runtime**, et non comme une preuve de vérité factuelle.
+It should be read as a **runtime stability signal**, not as proof of factual truth.
 
-Un G-score élevé peut indiquer qu’une génération est stable, régulière ou cohérente du point de vue runtime. Toutefois, cette stabilité peut coexister avec une réponse factuellement incorrecte.
+A high G-score may indicate that a generation is stable, regular, or coherent from a runtime perspective. However, this stability may coexist with a factually incorrect answer.
 
-Ce cas est appelé **stabilité trompeuse**.
+This case is referred to as **misleading stability**.
 
 ### ΔG
 
-**Signal de variation runtime associé aux variations comportementales temporelles entre fenêtres d’exécution.**
+**Runtime variation signal associated with temporal behavioral variation across execution windows.**
 
-ΔG est destiné à :
+ΔG is intended for:
 
-* l’observabilité runtime ;
-* le suivi des variations comportementales ;
-* la télémétrie de gouvernance ;
-* la détection de zones d’instabilité ou de tension ;
-* l’identification de ruptures locales ou de transitions comportementales.
+* runtime observability;
+* behavioral variation monitoring;
+* governance telemetry;
+* surfacing instability zones or tension areas;
+* identifying local ruptures or behavioral transitions.
 
-ΔG n’est pas :
+ΔG is not:
 
-* un signal de vérité ;
-* un mécanisme de reconstruction cognitive ;
-* un système d’omniscience sémantique ;
-* une preuve automatique d’erreur.
+* a truth signal;
+* a cognition reconstruction mechanism;
+* a semantic omniscience system;
+* automatic proof of error.
 
 ---
 
-## Autres signaux associés
+## Associated Signals
 
-Selon les campagnes et les contextes d’intégration, les signaux suivants peuvent être associés à G et ΔG.
+Depending on campaigns and integration contexts, the following signals may be associated with G and ΔG.
 
 ### FLAG
 
-Signal d’alerte runtime indiquant qu’une sortie mérite une attention particulière, une vérification renforcée ou une escalade.
+Runtime alert signal indicating that an output deserves special attention, reinforced verification, or escalation.
 
-Un FLAG ne signifie pas automatiquement qu’une réponse est fausse.
-Il doit être interprété comme un signal d’attention, non comme un rejet systématique.
+A FLAG does not automatically mean that an answer is false.
+It should be interpreted as an attention signal, not as systematic rejection.
 
 ### DROP
 
-Profil ou événement indiquant une rupture, une chute, une variation forte ou une zone de tension dans le signal observé.
+Profile or event indicating a rupture, drop, strong variation, or tension zone in the observed signal.
 
-Un profil DROP doit être analysé avec G, ΔG, FLAG, le régime runtime et, lorsque c’est pertinent, une couche factuelle externe.
+A DROP profile should be analyzed together with G, ΔG, FLAG, runtime regime, and, where relevant, an external factual layer.
 
-### Régime runtime
+### Runtime regime
 
-État synthétique décrivant le contexte runtime global d’une sortie ou d’une séquence observée.
+Synthetic state describing the global runtime context of an observed output or sequence.
 
-Un régime `STABLE` ne suffit pas à conclure qu’un système est sûr, fiable ou factuellement correct.
-Le régime doit toujours être croisé avec les autres signaux.
+A `STABLE` regime is not sufficient to conclude that a system is safe, reliable, or factually correct.
+The regime should always be crossed with other signals.
 
-### Exactitude benchmark
+### Benchmark accuracy
 
-Couche externe de validation factuelle utilisée dans certaines campagnes d’analyse.
+External factual validation layer used in some analysis campaigns.
 
-Elle permet de distinguer :
+It helps distinguish between:
 
-* une sortie stable et correcte ;
-* une sortie stable mais incorrecte ;
-* une sortie instable mais éventuellement correcte ;
-* une sortie nécessitant une vérification complémentaire.
+* stable and correct output;
+* stable but incorrect output;
+* unstable but potentially correct output;
+* output requiring additional verification.
 
-L’exactitude benchmark n’est pas un signal runtime interne.
-Elle sert de couche externe de comparaison et de validation factuelle.
-
----
-
-## Lecture opérationnelle des signaux
-
-Les signaux NeoMundi doivent être interprétés dans une logique **multi-signal**.
-
-Aucun signal isolé ne suffit à caractériser le risque d’une sortie générative.
-
-| Signal observé                    | Interprétation                                                    | Risque principal                                                    | Action recommandée                                                                  |
-| --------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| G-score élevé seul                | Génération stable, régulière ou cohérente du point de vue runtime | Confusion possible entre stabilité et vérité factuelle              | Ne pas utiliser G seul pour valider une réponse ; croiser avec une couche factuelle |
-| G-score élevé + exactitude faible | Stabilité trompeuse : réponse stable mais incorrecte              | Forte confiance apparente malgré une erreur factuelle               | Déclencher une validation factuelle externe ou une revue renforcée                  |
-| G-score faible ou instable        | Fragilité runtime, irrégularité ou comportement moins stable      | Sortie potentiellement sensible au contexte, au modèle ou au prompt | Examiner la question, le provider et les variations associées                       |
-| ΔG élevé ou profil DROP           | Variation forte, rupture locale ou zone de tension                | Transition runtime, instabilité ponctuelle ou dégradation locale    | Classer comme zone d’attention prioritaire                                          |
-| FLAG                              | Alerte runtime indiquant qu’une sortie mérite vérification        | Surinterprétation comme erreur automatique                          | Utiliser comme signal d’escalade, pas comme rejet systématique                      |
-| FLAG + DROP                       | Zone de risque runtime plus forte                                 | Risque accru d’instabilité ou de comportement problématique         | Prioriser l’analyse, envisager une revue humaine ou un second passage               |
-| Régime STABLE seul                | Contexte synthétique globalement stable                           | Pouvoir discriminant limité si STABLE est dominant                  | Ne jamais utiliser le régime seul ; croiser avec G, ΔG, FLAG et exactitude          |
-| ALLOW + exactitude faible         | Cas non détecté par le signal runtime                             | Faux négatif potentiel dans la logique de gouvernance               | Renforcer la couche factuelle ou benchmark                                          |
-| Forte saturation de G-score       | Concentration du score autour d’un plafond observé                | Ambiguïté entre stabilité réelle et effet de saturation             | Tester la robustesse sur plusieurs providers, prompts et répétitions                |
+Benchmark accuracy is not an internal runtime signal.
+It serves as an external comparison and factual validation layer.
 
 ---
 
-## Règles d’interprétation actionnables
+## Operational Signal Reading
 
-Ces règles constituent une première grammaire exploratoire pour l’observabilité et la gouvernance runtime.
+NeoMundi signals should be interpreted through a **multi-signal approach**.
 
-Elles ne doivent pas être comprises comme des seuils définitifs.
+No isolated signal is sufficient to characterize the risk of a generative output.
 
-| Règle | Condition                                  | Interprétation                          | Action recommandée                       |
-| ----- | ------------------------------------------ | --------------------------------------- | ---------------------------------------- |
-| R1    | G élevé + exactitude faible                | Stabilité trompeuse                     | Ajouter une validation factuelle externe |
-| R2    | G élevé seul                               | Stabilité runtime, pas preuve de vérité | Ne jamais utiliser G seul pour valider   |
-| R3    | FLAG + DROP                                | Zone de risque runtime prioritaire      | Escalade ou revue humaine                |
-| R4    | G faible + ΔG élevé                        | Rupture ou tension potentielle          | Investiguer comme zone de transition     |
-| R5    | FLAG + réponse correcte                    | Alerte sans erreur factuelle directe    | Lire comme attention, pas rejet          |
-| R6    | Régime STABLE seul                         | Signal synthétique insuffisant          | Croiser avec G, ΔG, FLAG et exactitude   |
-| R7    | G stable + faible FLAG + faible exactitude | Profil stable mais factuellement faible | Ajouter une couche factuelle             |
-| R8    | Forte saturation de G                      | Stabilité forte ou effet de plafond     | Analyser variabilité, ΔG, FLAG et DROP   |
-| R9    | Forte variabilité de G entre providers     | Sensibilité au modèle ou au contexte    | Utiliser comme cas de test prioritaire   |
-| R10   | Signal unique utilisé seul                 | Base décisionnelle insuffisante         | Utiliser une lecture multi-signal        |
-
----
-
-## Classification OBS/GOV-ready
-
-Pour une première intégration externe, les signaux doivent être consommés selon leur rôle dans une architecture d’observabilité ou de gouvernance.
-
-| Signal               | Catégorie              | Usage recommandé                                                         |
-| -------------------- | ---------------------- | ------------------------------------------------------------------------ |
-| G-score              | Obligatoire            | Signal central de stabilité runtime, à croiser avec une couche factuelle |
-| ΔG / dg_variation    | Obligatoire            | Détection de rupture, tension ou transition locale                       |
-| FLAG / taux de FLAG  | Obligatoire            | Signal d’alerte, d’escalade ou de vérification renforcée                 |
-| Exactitude benchmark | Obligatoire hors ligne | Couche externe de validation factuelle                                   |
-| Régime               | Recommandé             | Lecture synthétique du contexte runtime, non suffisante seule            |
-| dg_profile           | Recommandé             | Profil simplifié de variation, utile pour des règles interprétables      |
-| G-score seul         | À éviter seul          | Risque de confusion entre stabilité et factualité                        |
-| Régime seul          | À éviter seul          | Trop synthétique pour servir de déclencheur isolé                        |
+| Observed signal                     | Interpretation                                                | Main risk                                                      | Recommended action                                                         |
+| ----------------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| High G-score alone                  | Stable, regular, or runtime-coherent generation               | Possible confusion between stability and factual truth         | Do not use G alone to validate an answer; cross-check with a factual layer |
+| High G-score + low factual accuracy | Misleading stability: stable but incorrect answer             | Apparent confidence despite factual error                      | Trigger external factual validation or reinforced review                   |
+| Low or unstable G-score             | Runtime fragility, irregularity, or less stable behavior      | Output may be sensitive to context, model, or prompt           | Examine the question, provider, and associated variations                  |
+| High ΔG or DROP profile             | Strong variation, local rupture, or tension zone              | Runtime transition, punctual instability, or local degradation | Classify as priority attention zone                                        |
+| FLAG                                | Runtime alert indicating that an output deserves verification | Overinterpretation as automatic error                          | Use as escalation signal, not as systematic rejection                      |
+| FLAG + DROP                         | Stronger runtime risk zone                                    | Increased risk of instability or problematic behavior          | Prioritize analysis; consider human review or second validation pass       |
+| STABLE regime alone                 | Synthetic context indicating a globally stable state          | Limited discriminative power if STABLE dominates               | Never use regime alone; cross with G, ΔG, FLAG, and factual accuracy       |
+| ALLOW + low factual accuracy        | Case not detected by runtime signal                           | Potential false negative in governance logic                   | Reinforce factual or benchmark layer                                       |
+| Strong G-score saturation           | Score concentration around an observed ceiling                | Ambiguity between real stability and saturation effect         | Test robustness across providers, prompts, and repetitions                 |
 
 ---
 
-## Exemple de lecture multi-signal
+## Actionable Interpretation Rules
 
-Une intégration simple peut lire les signaux de la manière suivante :
+These rules form a first exploratory grammar for runtime observability and governance.
+
+They should not be understood as definitive thresholds.
+
+| Rule | Condition                             | Interpretation                        | Recommended action                           |
+| ---- | ------------------------------------- | ------------------------------------- | -------------------------------------------- |
+| R1   | High G + low factual accuracy         | Misleading stability                  | Add external factual validation              |
+| R2   | High G alone                          | Runtime stability, not proof of truth | Never use G alone to validate                |
+| R3   | FLAG + DROP                           | Priority runtime risk zone            | Escalation or human review                   |
+| R4   | Low G + high ΔG                       | Potential rupture or tension          | Investigate as transition zone               |
+| R5   | FLAG + correct answer                 | Alert without direct factual error    | Read as attention, not rejection             |
+| R6   | STABLE regime alone                   | Insufficient synthetic signal         | Cross with G, ΔG, FLAG, and factual accuracy |
+| R7   | Stable G + low FLAG + low accuracy    | Stable but factually weak profile     | Add factual layer                            |
+| R8   | Strong G saturation                   | Strong stability or ceiling effect    | Analyze variability, ΔG, FLAG, and DROP      |
+| R9   | Strong G variability across providers | Model or context sensitivity          | Use as priority test case                    |
+| R10  | Single signal used alone              | Insufficient decision basis           | Use a multi-signal reading                   |
+
+---
+
+## OBS/GOV-ready Classification
+
+For a first external integration, signals should be consumed according to their role in an observability or governance architecture.
+
+| Signal             | Category         | Recommended use                                                      |
+| ------------------ | ---------------- | -------------------------------------------------------------------- |
+| G-score            | Required         | Central runtime stability signal, to be crossed with a factual layer |
+| ΔG / dg_variation  | Required         | Detection of rupture, tension, or local transition                   |
+| FLAG / FLAG rate   | Required         | Alert, escalation, or reinforced verification signal                 |
+| Benchmark accuracy | Required offline | External factual validation layer                                    |
+| Regime             | Recommended      | Synthetic reading of runtime context, not sufficient alone           |
+| dg_profile         | Recommended      | Simplified variation profile, useful for interpretable rules         |
+| G-score alone      | Avoid alone      | Risk of confusion between stability and factuality                   |
+| Regime alone       | Avoid alone      | Too synthetic to be used as an isolated trigger                      |
+
+---
+
+## Multi-signal Reading Examples
+
+A simple integration may read the signals as follows:
 
 ```text
-Cas 1 :
-G-score élevé
-ΔG faible
-Aucun FLAG
-Régime STABLE
-Exactitude benchmark élevée
+Case 1:
+High G-score
+Low ΔG
+No FLAG
+STABLE regime
+High benchmark accuracy
 
-Lecture :
-sortie stable, cohérente et factuellement validée dans le cadre du benchmark.
+Reading:
+stable, coherent, and factually validated output within the benchmark context.
 ```
 
 ```text
-Cas 2 :
-G-score élevé
-ΔG faible
-Aucun FLAG
-Régime STABLE
-Exactitude benchmark faible
+Case 2:
+High G-score
+Low ΔG
+No FLAG
+STABLE regime
+Low benchmark accuracy
 
-Lecture :
-stabilité trompeuse.
-La sortie paraît stable du point de vue runtime, mais elle échoue à la validation factuelle.
-Action recommandée : validation externe, revue renforcée ou couche de grounding.
+Reading:
+misleading stability.
+The output appears stable from a runtime perspective, but fails factual validation.
+Recommended action: external validation, reinforced review, or grounding layer.
 ```
 
 ```text
-Cas 3 :
-G-score faible
-ΔG élevé
-FLAG présent
-Profil DROP
-Régime instable ou transitionnel
+Case 3:
+Low G-score
+High ΔG
+FLAG present
+DROP profile
+Unstable or transitional regime
 
-Lecture :
-zone de tension runtime.
-Action recommandée : escalade, revue humaine, second passage ou routage vers un mécanisme de contrôle.
+Reading:
+runtime tension zone.
+Recommended action: escalation, human review, second validation pass, or routing to a control mechanism.
 ```
 
 ---
 
-## Position méthodologique
+## Methodological Position
 
-Les signaux runtime NeoMundi sont des **artefacts d’observabilité orientés gouvernance**.
+NeoMundi runtime telemetry signals are **governance-oriented observability artifacts**.
 
-Ils sont conçus pour soutenir :
+They are designed to support:
 
-* la supervision runtime ;
-* les workflows de gouvernance ;
-* l’auditabilité ;
-* l’analyse télémétrique ;
-* les systèmes d’orchestration ;
-* la détection de zones de tension, de rupture ou de stabilité trompeuse.
+* runtime supervision;
+* governance workflows;
+* auditability;
+* telemetry analysis;
+* orchestration systems;
+* detection of tension zones, ruptures, or misleading stability.
 
-Ils ne prétendent pas :
+They are not intended to:
 
-* reconstruire exhaustivement la cognition interne d’un modèle ;
-* établir une vérité sémantique universelle ;
-* certifier automatiquement une réponse ;
-* remplacer une validation métier, juridique, scientifique ou factuelle.
+* exhaustively reconstruct the internal cognition of a model;
+* establish universal semantic truth;
+* automatically certify an answer;
+* replace domain-specific, legal, scientific, or factual validation.
 
-La recommandation minimale est de combiner au moins :
+The minimum recommended reading combines at least:
 
-* G-score ;
-* ΔG ou dg_variation ;
-* FLAG ;
-* régime ;
-* couche factuelle ou benchmark externe lorsque l’usage le requiert.
-
----
-
-## Limites d’interprétation
-
-Un G-score élevé ne signifie pas qu’une réponse est vraie.
-
-Un FLAG ne signifie pas automatiquement qu’une réponse est fausse.
-
-Un régime STABLE ne suffit pas à conclure qu’un système est sûr.
-
-Un ΔG élevé ne prouve pas une erreur, mais signale une variation ou une tension qui mérite attention.
-
-Les signaux doivent être interprétés ensemble, dans leur contexte d’usage, avec les données disponibles et les limites du protocole de mesure.
+* G-score;
+* ΔG or dg_variation;
+* FLAG;
+* regime;
+* factual layer or external benchmark when required by the use case.
 
 ---
 
-## Intégration dans des systèmes de gouvernance
+## Interpretation Boundaries
 
-Dans une architecture d’observabilité, les signaux peuvent être utilisés pour :
+A high G-score does not mean that an answer is true.
 
-* tracer des sorties génératives ;
-* comparer des comportements entre providers ou modèles ;
-* identifier des zones de tension ;
-* produire des artefacts d’audit ;
-* surveiller des variations runtime ;
-* alimenter des dashboards de gouvernance.
+A FLAG does not automatically mean that an answer is false.
 
-Dans une architecture de gouvernance plus avancée, ils peuvent contribuer à des décisions configurables, par exemple :
+A STABLE regime is not sufficient to conclude that a system is safe.
 
-* laisser passer une sortie ;
-* déclencher une vérification factuelle ;
-* demander une régénération ;
-* router vers un autre modèle ;
-* escalader vers une revue humaine ;
-* documenter un événement critique.
+A high ΔG does not prove an error, but signals a variation or tension that deserves attention.
 
-Ces usages doivent rester configurables, contextualisés et adaptés au niveau de risque du domaine concerné.
+Signals must be interpreted together, within their usage context, with the available data and the limits of the measurement protocol.
 
 ---
 
-## Référence externe
+## Integration into Governance Systems
 
-Une première lecture exploratoire externe des signaux runtime NeoMundi a été réalisée par Pape Malick DIOP, Data Scientist / ML Researcher.
+In an observability architecture, the signals may be used to:
 
-Le rapport analyse notamment :
+* trace generative outputs;
+* compare behaviors across providers or models;
+* identify tension zones;
+* produce audit artifacts;
+* monitor runtime variations;
+* feed governance dashboards.
 
-* G-score ;
-* ΔG ;
-* FLAG ;
-* régime runtime ;
-* exactitude benchmark ;
-* stabilité trompeuse ;
-* lecture OBS/GOV-ready.
+In a more advanced governance architecture, they may contribute to configurable decisions, for example:
 
-Ce rapport est exploratoire.
-Il ne constitue ni une validation mathématique définitive, ni une certification du produit.
-Il propose une première grammaire d’interprétation et des règles actionnables pour l’intégration externe.
+* allow an output;
+* trigger factual verification;
+* request regeneration;
+* route to another model;
+* escalate to human review;
+* document a critical event.
 
-Analyse contributeur associée :
-
-* [Signaux temps réel, stabilité trompeuse et importance d’une lecture multi-signaux](https://neomundi.org/observatoire-ia/signaux-temps-reel-stabilite-trompeuse-et-importance-lecture-multi-signaux)
-
----
-
-## Licence
-
-Ce dépôt est publié sous licence Apache-2.0.
+These uses should remain configurable, contextualized, and adapted to the risk level of the relevant domain.
 
 ---
 
-## À propos
+## External Exploratory Review
 
-Définitions publiques des signaux de télémétrie runtime et notes méthodologiques pour l’observabilité des IA orientée gouvernance.
+An initial external exploratory review of NeoMundi runtime signals was conducted by Pape Malick DIOP, Data Scientist / ML Researcher.
+
+The review analyzes:
+
+* G-score;
+* ΔG;
+* FLAG;
+* runtime regime;
+* benchmark accuracy;
+* misleading stability;
+* OBS/GOV-ready interpretation.
+
+This review is exploratory.
+It is neither a definitive mathematical validation nor a product certification.
+It proposes a first interpretation grammar and actionable rules for external integration.
+
+Related contributor analysis:
+
+* [Runtime signals, misleading stability and the importance of multi-signal reading](https://neomundi.org/observatoire-ia/signaux-temps-reel-stabilite-trompeuse-et-importance-lecture-multi-signaux)
+
+---
+
+## License
+
+This repository is published under the Apache-2.0 license.
+
+---
+
+## About
+
+Public runtime telemetry signal definitions and methodological notes for governance-oriented AI observability.
