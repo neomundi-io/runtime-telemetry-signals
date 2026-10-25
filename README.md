@@ -1,3 +1,7 @@
+> **Historical reference — superseded entry point (25 October 2026).** Start with [Metric Contract](https://github.com/neomundi-io/neomundi-metric-contract) and the [measurement API](https://github.com/neomundi-io/neomundi-runtime-measurement). The original files remain here for citations and traceability; old terminology and examples are not a current production contract.
+>
+> **Référence historique — ancienne entrée remplacée.** Les fichiers sont conservés avec leur contexte. [Comprendre les mesures](https://github.com/neomundi-io/neomundi-metric-contract/blob/main/READING_MEASUREMENTS.fr.md) · [Explorer les preuves](https://github.com/neomundi-io/neomundi-station-public/blob/main/EVIDENCE.fr.md).
+
 # Runtime Telemetry Signals
 
 Public signal definitions and methodological guidance for governance-oriented AI runtime observability.
