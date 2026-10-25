@@ -1,3 +1,5 @@
+> **Référence historique — 25 octobre 2026.** Le sens actuel des mesures se lit dans [Metric Contract](https://github.com/neomundi-io/neomundi-metric-contract) et la [documentation API](https://github.com/neomundi-io/neomundi-runtime-measurement). Les définitions ci-dessous restent conservées pour leur contexte et leurs citations ; elles ne constituent pas une spécification actuelle de production.
+
 # Signaux de télémétrie runtime
 
 Définitions publiques des signaux et recommandations méthodologiques pour l’observabilité runtime des IA orientée gouvernance.
